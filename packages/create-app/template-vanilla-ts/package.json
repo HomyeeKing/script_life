@@ -1,0 +1,33 @@
+{
+  "name": "vite-typescript-starter",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.6.5",
+    "typescript": "^4.2.3",
+    "vite": "^2.3.5",
+    "eslint": "^7.27.0",
+    "lint-staged": "^10.5.4",
+    "prettier": "2.3.0",
+    "yorkie": "^2.0.0"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write"
+    ],
+    "*.ts": [
+      "eslint",
+      "prettier --parser=typescript --write"
+    ],
+    "*.html": [
+      "prettier --write"
+    ]
+  }
+}

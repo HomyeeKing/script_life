@@ -1,0 +1,21 @@
+{
+  "name": "@homy/create-app",
+  "description": "handful scripts make life easier",
+  "version": "0.0.0",
+  "author": {
+    "name": "Homyee King",
+    "email": "HomyeeKing@gmail.com"
+  },
+  "bin": {
+    "create-app": "index.js",
+    "cva": "index.js"
+  },
+  "repository": {
+    "url": "git@github.com:HomyeeKing/script_life.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cac": "^6.7.3",
+    "prompts": "^2.4.1"
+  }
+}

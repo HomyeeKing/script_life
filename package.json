@@ -1,0 +1,41 @@
+{
+  "name": "script_life",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "description": "some script which make life easier",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HomyeeKing/script_life.git"
+  },
+  "author": "Homyee King",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HomyeeKing/script_life/issues"
+  },
+  "homepage": "https://github.com/HomyeeKing/script_life#readme",
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.6.5",
+    "eslint": "^7.27.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.0",
+    "yorkie": "^2.0.0"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write"
+    ],
+    "*.ts": [
+      "eslint",
+      "prettier --parser=typescript --write"
+    ],
+    "*.html": [
+      "prettier --write"
+    ]
+  }
+}
