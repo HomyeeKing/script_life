@@ -1,19 +1,16 @@
 {
   "name": "@homy/create-app",
-  "description": "handful scripts make life easier",
-  "version": "0.0.0",
-  "author": {
-    "name": "Homyee King",
-    "email": "HomyeeKing@gmail.com"
-  },
-  "bin": {
-    "create-app": "index.js",
-    "cva": "index.js"
-  },
+  "version": "0.0.1",
   "repository": {
-    "url": "git@github.com:HomyeeKing/script_life.git"
+    "type": "git",
+    "url": "git+https://github.com/HomyeeKing/script_life.git"
   },
+  "author": "Homyee King",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HomyeeKing/script_life/issues"
+  },
+  "homepage": "https://github.com/HomyeeKing/script_life/tree/master/packages/create-app/#readme",
   "dependencies": {
     "cac": "^6.7.3",
     "prompts": "^2.4.1"
