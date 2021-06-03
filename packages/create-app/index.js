@@ -1,9 +1,11 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 
 const fs = require('fs')
-const cac = require('cac')
 const path = require('path')
+const cac = require('cac')
 const prompts = require('prompts')
+
 const cli = cac('homy')
 
 const cwd = process.cwd()
@@ -104,12 +106,12 @@ cli.command('create <name>').action(async (name) => {
   write('package.json', JSON.stringify(pkg, null, 2))
   const pkgManager = /yarn/.test(process.env.npm_execpath) ? 'yarn' : 'npm'
 
-  console.log(`\nDone. Now run:\n`)
+  console.log('\nDone. Now run:\n')
   if (folderPath !== cwd) {
     console.log(`  cd ${path.relative(cwd, folderPath)}`)
   }
-  console.log(`  ${pkgManager === 'yarn' ? `yarn` : `npm install`}`)
-  console.log(`  ${pkgManager === 'yarn' ? `yarn dev` : `npm run dev`}`)
+  console.log(`  ${pkgManager === 'yarn' ? 'yarn' : 'npm install'}`)
+  console.log(`  ${pkgManager === 'yarn' ? 'yarn dev' : 'npm run dev'}`)
   console.log()
 })
 
