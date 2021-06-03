@@ -5,6 +5,8 @@
     },
     "rules": {
         "curly":"off",
-        "@typescript-eslint/no-var-requires": "off"
+        "@typescript-eslint/no-var-requires": "off",
+        "comma-dangle":"off",
+        "brace-style":"off"
     }
 }
