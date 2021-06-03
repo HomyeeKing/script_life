@@ -2,9 +2,6 @@
   "name": "script_life",
   "version": "1.0.0",
   "private": true,
-  "bin": {
-    "create-app": "./packages/create-app/index.js"
-  },
   "workspaces": [
     "packages/*"
   ],
