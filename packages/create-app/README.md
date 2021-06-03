@@ -1,3 +1,5 @@
+A CLI to create a project quickly
+
 With NPM:
 
 ```bash
