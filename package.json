@@ -21,7 +21,12 @@
     "eslint": "^7.27.0",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.0",
+    "typescript": "^4.3.5",
     "yorkie": "^2.0.0"
+  },
+  "dependencies": {
+    "cac": "^6.7.3",
+    "prompts": "^2.4.1"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

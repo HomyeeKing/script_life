@@ -13,9 +13,5 @@
   "bugs": {
     "url": "https://github.com/HomyeeKing/script_life/issues"
   },
-  "homepage": "https://github.com/HomyeeKing/script_life/tree/master/packages/create-app/#readme",
-  "dependencies": {
-    "cac": "^6.7.3",
-    "prompts": "^2.4.1"
-  }
+  "homepage": "https://github.com/HomyeeKing/script_life/tree/master/packages/create-app/#readme"
 }

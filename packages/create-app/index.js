@@ -64,7 +64,7 @@ const questions = [
   }
 ]
 
-cli.command('create <name>').action(async (name) => {
+cli.command('create <name>').action(async(name) => {
   const folderPath = path.join(cwd, name.trim())
   let res = {}
   if (fs.existsSync(folderPath)) {
