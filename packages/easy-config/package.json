@@ -1,10 +1,10 @@
 {
-  "name": "git-cli",
+  "name": "switch-helper",
   "version": "1.0.0",
   "description": "git-cli",
   "author": "Homyee King",
   "bin": {
-    "git-cli": "./index.js"
+    "switch-helper": "./index.js"
   },
   "repository": {
       "type": "git",
