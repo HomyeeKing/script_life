@@ -3,16 +3,17 @@
 const fs = require('fs')
 const path = require('path')
 const os = require('os')
-const { exec } = require('child_process')
+const { exec, execSync } = require('child_process')
 const cac = require('cac')
 const prompts = require('prompts')
 const cli = cac('git-cli')
-
+const pkg = require('./package.json')
 const isWin = os.platform() === 'win32'
 const homePath = isWin ? process.env.USERPROFILE : process.env.HOME
 
 console.log(`detect that your are on ${isWin ? 'Windows' : 'Mac'}`)
 
+const resolve = name => path.resolve(__dirname, name)
 // check if there's exist a file contain git account info
 const gitAccountPath = path.resolve(homePath, '.git-account')
 
@@ -101,7 +102,18 @@ async function createGitAcFile() {
 if (isWin) {
   // TODO: powershell or bash , this is a question
 } else {
+  // chmod the template, because we need to make the hooks file executable
+  //   reference:https://stackoverflow.com/questions/8598639/why-is-my-git-pre-commit-hook-not-executable-by-default
+  execSync(`chmod -R u+x ${resolve('templates')}`, (err) => {
+    console.log(`
+    the git hooks file is not executable,please report it to ${pkg.bugs.url}
+     you can run 
+    >$ chmod -R u+x ${homePath}/.templates
+    for temporal fix`)
+    throw err
+  })
   copy('./templates', homePath)
+  console.log(`hooks has been copied into ${homePath}`)
 }
 
 // #region utils
@@ -112,21 +124,21 @@ if (isWin) {
  * @param {*} data
  * 把一个文件夹的内容拷贝到另一个文件夹下，而不是文件夹的移动
  */
-function copyDir(srcDir, destDir) {
+function copyDir(srcDir, destDir, flags) {
   fs.mkdirSync(destDir, { recursive: true })
   const files = fs.readdirSync(srcDir)
   for (const file of files) {
     const srcFile = path.join(srcDir, file)
     const destFile = path.join(destDir, file)
-    copy(srcFile, destFile)
+    copy(srcFile, destFile, flags)
   }
 }
-function copy(src, dest) {
+function copy(src, dest, flags) {
   const stat = fs.statSync(src)
   if (stat.isDirectory()) {
     copyDir(src, dest)
   } else {
-    fs.copyFileSync(src, dest)
+    fs.copyFileSync(src, dest, flags)
   }
 }
 
