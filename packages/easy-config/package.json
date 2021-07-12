@@ -7,16 +7,18 @@
     "switch-helper": "./index.js"
   },
   "repository": {
-      "type": "git",
-      "url": "https://github.com/HomyeeKing/git-cli"
+    "type": "git",
+    "url": "https://github.com/HomyeeKing/git-cli"
   },
-  "homepage":"https://github.com/HomyeeKing/git-cli#readme",
+  "homepage": "https://github.com/HomyeeKing/git-cli#readme",
   "bugs": {
     "url": "https://github.com/HomyeeKing/git-cli/issues"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["git"],
+  "keywords": [
+    "git"
+  ],
   "license": "MIT"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@homy/create-app",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "bin": {
     "create-app": "index.js"
   },
