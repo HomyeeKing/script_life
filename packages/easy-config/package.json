@@ -4,22 +4,22 @@
   "description": "git-cli",
   "author": "Homyee King",
   "bin": {
-    "switch-helper": "./index.js"
+    "switch-helper": "gindex.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/HomyeeKing/git-cli"
+    "url": "git+https://github.com/HomyeeKing/script_life.git"
   },
-  "homepage": "https://github.com/HomyeeKing/git-cli#readme",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/HomyeeKing/git-cli/issues"
+    "url": "https://github.com/HomyeeKing/script_life/issues"
   },
+  "homepage": "https://github.com/HomyeeKing/script_life/tree/master/packages/easy-config/#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "git"
   ],
-  "license": "MIT",
   "gitHead": "5f485d442a89b1c97f15912e04fe92d5220c0ecb"
 }
