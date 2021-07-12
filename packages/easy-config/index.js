@@ -28,6 +28,7 @@ const gitAcQues = [
     type: 'text',
     name: 'githubEmail',
     message: 'Please input github user email',
+    initial: prev => `${prev.replace(/ /g, '')}@`,
     validate: value => (value === '' ? 'required!' : true)
   },
   {
@@ -39,19 +40,18 @@ const gitAcQues = [
   {
     type: 'text',
     name: 'gitlabEmail',
+    initial: prev => `${prev.replace(/ /g, '')}@`,
     message: 'Please input gitlab user email',
     validate: value => (value === '' ? 'required!' : true)
   }
 ]
-if (!fs.existsSync(gitAccountPath)) {
-  createGitAcFile()
-}
+
 cli
   .command('')
   .option('-u, --update', 'update git info')
-  .action((options) => {
+  .action(async(options) => {
     if (options.u) {
-      createGitAcFile()
+      await createGitAcFile(true)
     }
   })
 
@@ -84,24 +84,42 @@ cli.command('zsh').action(async() => {
   })
 })
 
-async function createGitAcFile() {
-  const { githubEmail, githubName, gitlabEmail, gitlabName } = await prompts(
-    gitAcQues
-  )
-  const str = `
-    githubName=${githubName}
-    githubEmail=${githubEmail}
-    gitlabName=${gitlabName}
-    gitlabEmail=${gitlabEmail}`.trim()
-  fs.writeFileSync(gitAccountPath, str)
-  console.log(
-    `git account info has already save into ${isWin ? '' : '~/.git-account'}`
-  )
+async function createGitAcFile(update = false) {
+  if (update || !fs.existsSync(gitAccountPath)) {
+    let cancel = false
+    const { githubEmail, githubName, gitlabEmail, gitlabName } = await prompts(
+      gitAcQues,
+      {
+        onCancel: () => {
+          cancel = true
+          return false
+        }
+      }
+    )
+    if (!cancel) {
+      const str = `
+      githubName="${githubName}"
+      githubEmail="${githubEmail}"
+      gitlabName="${gitlabName}"
+      gitlabEmail="${gitlabEmail}"`.trim()
+      fs.writeFileSync(gitAccountPath, str)
+      console.log(
+        `git account info has already save into ${
+          isWin ? '' : '~/.git-account'
+        }`
+      )
+    }
+  }
 }
 
 if (isWin) {
   // TODO: powershell or bash , this is a question
 } else {
+  macInit()
+}
+
+async function macInit() {
+  await createGitAcFile()
   // chmod the template, because we need to make the hooks file executable
   //   reference:https://stackoverflow.com/questions/8598639/why-is-my-git-pre-commit-hook-not-executable-by-default
   execSync(`chmod -R u+x ${resolve('templates')}`, (err) => {

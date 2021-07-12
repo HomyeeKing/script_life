@@ -19,7 +19,7 @@ case "$url" in
         name="$gitlabName"
         ;;
     *) 
-        echo "not gitlab or github url, email and name will be set  empty"
+        echo "not gitlab or github url, email and name will be set empty"
         email=""
         name=""
         ;;

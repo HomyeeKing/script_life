@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #checkout hook to locally set user name and email based on user defined patterns
 #The patterns are matched against the clone url.
@@ -12,7 +12,8 @@ function warn() {
 email="$(git config --local user.email)"
 name="$(git config --local user.name)"
 
-if [[-n $email && -n $name]]; then
+if [[ -n $email && -n $name ]]
+then 
     warn "There's  email or name in local config, so we will overwrite it"
 fi
 
@@ -38,4 +39,4 @@ fi
 git config --local user.email "$email"
 git config --local user.name "$name"
 
-echo -e "\nIdentity set to $name <$email>"
+echo  "Identity set to $name <$email>"
