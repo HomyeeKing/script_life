@@ -130,7 +130,7 @@ async function macInit() {
     for temporal fix`)
     throw err
   })
-  copy('./templates', homePath)
+  copy(resolve('./templates'), homePath)
   console.log(`hooks has been copied into ${homePath}`)
 }
 
