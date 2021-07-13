@@ -21,5 +21,9 @@
   "keywords": [
     "git"
   ],
+  "dependencies": {
+    "cac": "^6.7.3",
+    "prompts": "^2.4.1"
+  },
   "gitHead": "da42b68d7b45cf0c44934aaa0cf8fc6c18a30a95"
 }
