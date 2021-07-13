@@ -1,0 +1,25 @@
+{
+  "name": "switch-helper",
+  "version": "1.0.1",
+  "description": "git-cli",
+  "author": "Homyee King",
+  "bin": {
+    "switch-helper": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HomyeeKing/script_life.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HomyeeKing/script_life/issues"
+  },
+  "homepage": "https://github.com/HomyeeKing/script_life/tree/master/packages/switch-helper/#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "git"
+  ],
+  "gitHead": "da42b68d7b45cf0c44934aaa0cf8fc6c18a30a95"
+}
