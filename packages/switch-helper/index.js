@@ -3,15 +3,15 @@
 const fs = require('fs')
 const path = require('path')
 const os = require('os')
-const { exec, execSync } = require('child_process')
+const { exec, execSync, spawn } = require('child_process')
 const cac = require('cac')
 const prompts = require('prompts')
-const cli = cac('git-cli')
 const pkg = require('./package.json')
+
+const cli = cac('switch-helper')
+
 const isWin = os.platform() === 'win32'
 const homePath = isWin ? process.env.USERPROFILE : process.env.HOME
-
-console.log(`detect that your are on ${isWin ? 'Windows' : 'Mac'}`)
 
 const resolve = name => path.resolve(__dirname, name)
 // check if there's exist a file contain git account info
@@ -46,12 +46,35 @@ const gitAcQues = [
   }
 ]
 
+async function macInit() {
+  await createGitAcFile()
+  // chmod the template, because we need to make the hooks file executable
+  //   reference:https://stackoverflow.com/questions/8598639/why-is-my-git-pre-commit-hook-not-executable-by-default
+  execSync(`chmod -R u+x ${resolve('templates')}`, (err) => {
+    console.log(`
+      the git hooks file is not executable,please report it to ${pkg.bugs.url}
+       you can run 
+      >$ chmod -R u+x ${homePath}/.templates
+      for temporal fix`)
+    throw err
+  })
+  copy(resolve('./templates'), homePath)
+  console.log(`hooks has been copied into ${homePath}`)
+}
+
 cli
   .command('')
   .option('-u, --update', 'update git info')
   .action(async(options) => {
+    console.log(`detect that your are on ${isWin ? 'Windows' : 'Mac'}`)
     if (options.u) {
       await createGitAcFile(true)
+    }
+
+    if (isWin) {
+      // TODO: powershell or bash , this is a question
+    } else {
+      macInit()
     }
   })
 
@@ -84,6 +107,21 @@ cli.command('zsh').action(async() => {
   })
 })
 
+// ssh RE
+cli
+  .command('ssh')
+  .option('--target <name>', 'Provide platform name')
+  .action((options) => {
+    const { target } = options
+    // run interactive command in node.js
+    // see https://stackoverflow.com/a/55044587 for more details
+    const ls = spawn('sh', ['ssh.sh', target], { stdio: 'inherit' })
+
+    ls.on('close', () => {
+      // TODO: get the path of user input
+    })
+  })
+
 async function createGitAcFile(update = false) {
   if (update || !fs.existsSync(gitAccountPath)) {
     let cancel = false
@@ -110,28 +148,6 @@ async function createGitAcFile(update = false) {
       )
     }
   }
-}
-
-if (isWin) {
-  // TODO: powershell or bash , this is a question
-} else {
-  macInit()
-}
-
-async function macInit() {
-  await createGitAcFile()
-  // chmod the template, because we need to make the hooks file executable
-  //   reference:https://stackoverflow.com/questions/8598639/why-is-my-git-pre-commit-hook-not-executable-by-default
-  execSync(`chmod -R u+x ${resolve('templates')}`, (err) => {
-    console.log(`
-    the git hooks file is not executable,please report it to ${pkg.bugs.url}
-     you can run 
-    >$ chmod -R u+x ${homePath}/.templates
-    for temporal fix`)
-    throw err
-  })
-  copy(resolve('./templates'), homePath)
-  console.log(`hooks has been copied into ${homePath}`)
 }
 
 // #region utils
@@ -162,4 +178,6 @@ function copy(src, dest, flags) {
 
 // #endregion
 
+cli.help()
+cli.version(pkg.version)
 cli.parse()
