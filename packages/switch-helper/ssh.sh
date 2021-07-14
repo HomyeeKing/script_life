@@ -51,9 +51,8 @@ fi
 
 pbcopy < ${keyPath}.pub
 
+echo "============================================================="
 echo "the publish key has been copied into the clipboard!"
-
-
 echo "Now you need to add the ssh key to the ${target} account"
 echo "You can follow the docs if you have no idea about it :) "
-# echo $((${target} == 'github'?"https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account":''))
+[[ ${target} == 'github' ]] &&  echo "https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account" || echo "https://docs.gitlab.com/ee/ssh/#add-an-ssh-key-to-your-gitlab-account"
