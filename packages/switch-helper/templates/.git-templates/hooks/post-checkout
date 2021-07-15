@@ -6,18 +6,25 @@
 #Based on http://www.dvratil.cz/2015/12/git-trick-628-automatically-set-commit-author-based-on-repo-url/
 
 function warn() {
-    echo -e "\n $1"
+    echo  "\n $1"
 }
+
+
 
 email="$(git config --local user.email)"
 name="$(git config --local user.name)"
 
-if [[ -n $email && -n $name ]]
-then 
-    warn "There's  email or name in local config, so we will overwrite it"
-fi
+# if [[ -z $email && -z $name ]]
+# then 
+#     warn "There's  email or name in local config, so we will overwrite it"
+# fi
 
-remote="$([[ $(git remote | wc -l) -eq 1 ]] && git remote || r)"
+# muti-remote case : using the first remote for now 
+# TODO: str2arr function
+# remotes=(${$(git remote)///})
+# remote="$([[ $(git remote | wc -l) -ge 1 ]] && git remote)"
+
+[[ $(git remote | wc -l) -ge 1 ]] && remote="origin"
 
 if [[ -z $remote ]]; then
     warn "Failed to detect remote."
